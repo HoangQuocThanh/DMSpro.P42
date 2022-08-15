@@ -1,0 +1,9 @@
+{
+  "culture": "en",
+    "texts": {
+        "SamplePageMessage": "A sample page for the SO module",
+        "Menu:SO": "Sales Order Management",
+        "Feature:SOGroup": "Sales Order Management",
+        "Feature:EnableSO": "Enable sales order management"
+    }
+}

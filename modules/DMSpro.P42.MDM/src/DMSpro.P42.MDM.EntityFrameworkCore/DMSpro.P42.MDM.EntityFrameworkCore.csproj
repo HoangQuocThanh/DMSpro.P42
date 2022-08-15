@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>DMSpro.P42.MDM</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.3.3" />
+    <ProjectReference Include="..\DMSpro.P42.MDM.Domain\DMSpro.P42.MDM.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

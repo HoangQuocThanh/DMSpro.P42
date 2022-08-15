@@ -1,0 +1,9 @@
+{
+  "culture": "en",
+    "texts": {
+        "SamplePageMessage": "A sample page for the MDM module",
+        "Menu:MDM": "Master Data Management",
+        "Feature:MDMGroup": "Master Data Management",
+        "Feature:EnableMDM": "Enable master data management"
+    }
+}

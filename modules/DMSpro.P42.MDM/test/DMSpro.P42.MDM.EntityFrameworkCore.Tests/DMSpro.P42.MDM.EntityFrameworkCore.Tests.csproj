@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>DMSpro.P42.MDM</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.0" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DMSpro.P42.MDM.EntityFrameworkCore\DMSpro.P42.MDM.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DMSpro.P42.MDM.TestBase\DMSpro.P42.MDM.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>
