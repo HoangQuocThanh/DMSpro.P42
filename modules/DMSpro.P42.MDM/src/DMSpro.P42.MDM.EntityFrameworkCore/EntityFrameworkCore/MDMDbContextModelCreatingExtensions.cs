@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
+using DMSpro.P42.MDM.Companies;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 
 namespace DMSpro.P42.MDM.EntityFrameworkCore;
@@ -29,5 +31,14 @@ public static class MDMDbContextModelCreatingExtensions
             b.HasIndex(q => q.CreationTime);
         });
         */
+        builder.Entity<Company>(b =>
+    {
+        b.ToTable(MDMDbProperties.DbTablePrefix + "Companies", MDMDbProperties.DbSchema);
+        b.ConfigureByConvention();
+        b.Property(x => x.TenantId).HasColumnName(nameof(Company.TenantId));
+        b.Property(x => x.Code).HasColumnName(nameof(Company.Code)).IsRequired().HasMaxLength(CompanyConsts.CodeMaxLength);
+        b.Property(x => x.Name).HasColumnName(nameof(Company.Name)).IsRequired().HasMaxLength(CompanyConsts.NameMaxLength);
+        b.Property(x => x.Address1).HasColumnName(nameof(Company.Address1));
+    });
     }
 }

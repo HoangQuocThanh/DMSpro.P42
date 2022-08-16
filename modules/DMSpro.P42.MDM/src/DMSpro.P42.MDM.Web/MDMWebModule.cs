@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.DependencyInjection;
 using DMSpro.P42.MDM.Localization;
 using DMSpro.P42.MDM.Web.Menus;
@@ -52,7 +52,8 @@ public class MDMWebModule : AbpModule
 
         Configure<RazorPagesOptions>(options =>
         {
-                //Configure authorization.
-            });
+            //Configure authorization.
+            options.Conventions.AuthorizePage("/Companies/Index", MDMPermissions.Companies.Default);
+        });
     }
 }

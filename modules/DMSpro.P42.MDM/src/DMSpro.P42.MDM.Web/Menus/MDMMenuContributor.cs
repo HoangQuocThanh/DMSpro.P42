@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+using DMSpro.P42.MDM.Permissions;
+using System.Threading.Tasks;
 using Volo.Abp.UI.Navigation;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
@@ -19,6 +20,9 @@ public class MDMMenuContributor : IMenuContributor
         }
 
         var moduleMenu = AddModuleMenuItem(context); //Do not delete `moduleMenu` variable as it will be used by ABP Suite!
+
+        AddMenuItemCompanies(context, moduleMenu);
+        AddMenuItemUsers(context, moduleMenu);
     }
 
     private static ApplicationMenuItem AddModuleMenuItem(MenuConfigurationContext context)
@@ -35,5 +39,31 @@ public class MDMMenuContributor : IMenuContributor
         //Add main menu items.
         context.Menu.Items.AddIfNotContains(moduleMenu);
         return moduleMenu;
+    }
+
+    private static void AddMenuItemCompanies(MenuConfigurationContext context, ApplicationMenuItem parentMenu)
+    {
+        parentMenu.AddItem(
+            new ApplicationMenuItem(
+                Menus.MDMMenus.Companies,
+                context.GetLocalizer<MDMResource>()["Menu:Companies"],
+                "/MDM/Companies",
+                icon: "fa fa-file-alt",
+                requiredPermissionName: MDMPermissions.Companies.Default
+            )
+        );
+    }
+    private static void AddMenuItemUsers(MenuConfigurationContext context, ApplicationMenuItem parentMenu)
+    {
+        parentMenu.AddItem(
+            new ApplicationMenuItem(
+                Menus.MDMMenus.Users,
+                context.GetLocalizer<MDMResource>()["Menu:Users"],
+                "/Identity/Users",
+                icon: "fa fa-user"
+                //,
+                //requiredPermissionName: MDMPermissions.Users.Default
+            )
+        );
     }
 }

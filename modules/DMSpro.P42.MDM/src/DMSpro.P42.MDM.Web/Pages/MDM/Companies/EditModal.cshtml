@@ -1,0 +1,34 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using DMSpro.P42.MDM.Localization
+@using DMSpro.P42.MDM.Web.Pages.MDM.Companies
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@using DMSpro.P42.MDM.Companies;
+@using System.Globalization
+@inject IHtmlLocalizer<MDMResource> L
+@model EditModalModel
+@{
+    Layout = null;
+}
+
+<form data-ajaxForm="true" asp-page="/MDM/Companies/EditModal" autocomplete="off">
+    <abp-modal id="CompanyEditModal">
+        <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+                    <abp-input asp-for="Id" />
+                    <abp-input asp-for="Company.ConcurrencyStamp" hidden="true" suppress-label="true"/>
+                    
+            <abp-input asp-for="Company.Code"/>
+
+            <abp-input asp-for="Company.Name"/>
+
+            <abp-input asp-for="Company.Address1"/>
+
+                    
+                
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>

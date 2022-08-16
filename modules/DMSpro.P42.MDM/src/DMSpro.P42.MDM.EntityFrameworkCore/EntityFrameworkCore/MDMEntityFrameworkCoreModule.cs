@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using DMSpro.P42.MDM.Companies;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
@@ -14,9 +15,11 @@ public class MDMEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<MDMDbContext>(options =>
         {
-                /* Add custom repositories here. Example:
-                 * options.AddRepository<Question, EfCoreQuestionRepository>();
-                 */
+            /* Add custom repositories here. Example:
+             * options.AddRepository<Question, EfCoreQuestionRepository>();
+             */
+            options.AddRepository<Company, Companies.EfCoreCompanyRepository>();
+
         });
     }
 }

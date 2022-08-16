@@ -1,9 +1,30 @@
 {
-  "culture": "en",
-    "texts": {
+  "Culture": "en",
+    "Texts": {
         "SamplePageMessage": "A sample page for the MDM module",
-        "Menu:MDM": "Master Data Management",
+        "Menu:MDM": "MDM",
         "Feature:MDMGroup": "Master Data Management",
-        "Feature:EnableMDM": "Enable master data management"
+        "Feature:EnableMDM": "Enable master data management",
+        "Permission:Companies": "Companies",
+        "Permission:MDM": "MDM",
+        "Permission:Create": "Create",
+        "Permission:Edit": "Edit",
+        "Permission:Delete": "Delete",
+        "Companies": "Companies",
+        "NewCompany": "New Company",
+        "Actions": "Actions",
+        "SuccessfullyDeleted": "Successfully deleted",
+        "DeleteConfirmationMessage": "Are you sure you want to delete this record?",
+        "Search": "Search",
+        "Pick": "Pick",
+        "SeeAdvancedFilters": "Advanced filters",
+        "Code": "Code",
+        "Name": "Name",
+        "Address1": "Address 1",
+        "Menu:Companies": "Companies",
+
+        "Permission:Users": "Users",
+        "Menu:Users": "Users",
+        "Users": "Companies"
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace DMSpro.P42.MDM.Web.Menus;
+namespace DMSpro.P42.MDM.Web.Menus;
 
 public class MDMMenus
 {
     public const string Prefix = "MDM";
 
-    //Add your menu items here...
-    //public const string Home = Prefix + ".MyNewMenuItem";
+    public const string Companies = Prefix + ".Companies";
+    public const string Users = Prefix + ".Users";
 
 }
