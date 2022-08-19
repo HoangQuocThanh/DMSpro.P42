@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DMSpro.P42.MDM.Companies
 {
     public static class CompanyConsts
@@ -12,5 +14,8 @@ namespace DMSpro.P42.MDM.Companies
         public const int CodeMinLength = 0;
         public const int CodeMaxLength = 20;
         public const int NameMaxLength = 200;
+
+        public const string ListCompany = "list_company";
+        public const string CurrentCompany = "current_company";
     }
 }

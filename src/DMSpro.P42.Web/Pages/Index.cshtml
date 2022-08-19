@@ -2,9 +2,11 @@
 @model DMSpro.P42.Web.Pages.IndexModel
 @using Microsoft.AspNetCore.Mvc.Localization
 @using DMSpro.P42.Localization
+@using Volo.Abp.Security.Claims
 @using Volo.Abp.Users
 @inject IHtmlLocalizer<P42Resource> L
 @inject ICurrentUser CurrentUser
+
 <abp-card>
     <abp-card-header>@L["Welcome"]</abp-card-header>
     <abp-card-body>

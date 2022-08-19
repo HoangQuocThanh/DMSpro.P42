@@ -1,3 +1,5 @@
+using DMSpro.P42.MDM.Shared;
+using Volo.Abp.Identity;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -19,28 +21,51 @@ namespace DMSpro.P42.MDM.Companies
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly CompanyManager _companyManager;
+        private readonly IRepository<IdentityUser, Guid> _identityUserRepository;
 
-        public CompaniesAppService(ICompanyRepository companyRepository, CompanyManager companyManager)
+        public CompaniesAppService(ICompanyRepository companyRepository, CompanyManager companyManager, IRepository<IdentityUser, Guid> identityUserRepository)
         {
             _companyRepository = companyRepository;
-            _companyManager = companyManager;
+            _companyManager = companyManager; _identityUserRepository = identityUserRepository;
         }
 
-        public virtual async Task<PagedResultDto<CompanyDto>> GetListAsync(GetCompaniesInput input)
+        public virtual async Task<PagedResultDto<CompanyWithNavigationPropertiesDto>> GetListAsync(GetCompaniesInput input)
         {
-            var totalCount = await _companyRepository.GetCountAsync(input.FilterText, input.Code, input.Name, input.Address1);
-            var items = await _companyRepository.GetListAsync(input.FilterText, input.Code, input.Name, input.Address1, input.Sorting, input.MaxResultCount, input.SkipCount);
+            var totalCount = await _companyRepository.GetCountAsync(input.FilterText, input.Code, input.Name, input.Address1, input.IdentityUserId);
+            var items = await _companyRepository.GetListWithNavigationPropertiesAsync(input.FilterText, input.Code, input.Name, input.Address1, input.IdentityUserId, input.Sorting, input.MaxResultCount, input.SkipCount);
 
-            return new PagedResultDto<CompanyDto>
+            return new PagedResultDto<CompanyWithNavigationPropertiesDto>
             {
                 TotalCount = totalCount,
-                Items = ObjectMapper.Map<List<Company>, List<CompanyDto>>(items)
+                Items = ObjectMapper.Map<List<CompanyWithNavigationProperties>, List<CompanyWithNavigationPropertiesDto>>(items)
             };
+        }
+
+        public virtual async Task<CompanyWithNavigationPropertiesDto> GetWithNavigationPropertiesAsync(Guid id)
+        {
+            return ObjectMapper.Map<CompanyWithNavigationProperties, CompanyWithNavigationPropertiesDto>
+                (await _companyRepository.GetWithNavigationPropertiesAsync(id));
         }
 
         public virtual async Task<CompanyDto> GetAsync(Guid id)
         {
             return ObjectMapper.Map<Company, CompanyDto>(await _companyRepository.GetAsync(id));
+        }
+
+        public virtual async Task<PagedResultDto<LookupDto<Guid>>> GetIdentityUserLookupAsync(LookupRequestDto input)
+        {
+            var query = (await _identityUserRepository.GetQueryableAsync())
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Filter),
+                    x => x.Name != null &&
+                         x.Name.Contains(input.Filter));
+
+            var lookupData = await query.PageBy(input.SkipCount, input.MaxResultCount).ToDynamicListAsync<IdentityUser>();
+            var totalCount = query.Count();
+            return new PagedResultDto<LookupDto<Guid>>
+            {
+                TotalCount = totalCount,
+                Items = ObjectMapper.Map<List<IdentityUser>, List<LookupDto<Guid>>>(lookupData)
+            };
         }
 
         [Authorize(MDMPermissions.Companies.Delete)]
@@ -54,7 +79,7 @@ namespace DMSpro.P42.MDM.Companies
         {
 
             var company = await _companyManager.CreateAsync(
-            input.Code, input.Name, input.Address1
+            input.IdentityUserIds, input.Code, input.Name, input.Address1
             );
 
             return ObjectMapper.Map<Company, CompanyDto>(company);
@@ -66,7 +91,7 @@ namespace DMSpro.P42.MDM.Companies
 
             var company = await _companyManager.UpdateAsync(
             id,
-            input.Code, input.Name, input.Address1, input.ConcurrencyStamp
+            input.IdentityUserIds, input.Code, input.Name, input.Address1, input.ConcurrencyStamp
             );
 
             return ObjectMapper.Map<Company, CompanyDto>(company);

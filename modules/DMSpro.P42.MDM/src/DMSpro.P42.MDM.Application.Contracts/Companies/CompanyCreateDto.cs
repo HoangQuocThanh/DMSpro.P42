@@ -13,5 +13,6 @@ namespace DMSpro.P42.MDM.Companies
         [StringLength(CompanyConsts.NameMaxLength)]
         public string Name { get; set; }
         public string Address1 { get; set; }
+        public List<Guid> IdentityUserIds { get; set; }
     }
 }

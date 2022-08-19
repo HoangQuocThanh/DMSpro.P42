@@ -1,0 +1,231 @@
+{
+  "modules": {
+    "accountAdmin": {
+      "rootPath": "accountAdmin",
+      "remoteServiceName": "AbpAccountAdmin",
+      "controllers": {
+        "Volo.Abp.Account.AccountSettingsController": {
+          "controllerName": "AccountSettings",
+          "controllerGroupName": "AccountSettings",
+          "type": "Volo.Abp.Account.AccountSettingsController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Account.IAccountSettingsAppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Account.AccountSettingsDto",
+                "typeSimple": "Volo.Abp.Account.AccountSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Account.AccountSettingsDto, Volo.Abp.Account.Pro.Admin.Application.Contracts",
+                  "type": "Volo.Abp.Account.AccountSettingsDto",
+                  "typeSimple": "Volo.Abp.Account.AccountSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Account.AccountSettingsDto",
+                  "typeSimple": "Volo.Abp.Account.AccountSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "GetTwoFactorAsync": {
+              "uniqueName": "GetTwoFactorAsync",
+              "name": "GetTwoFactorAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings/two-factor",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Account.AccountTwoFactorSettingsDto",
+                "typeSimple": "Volo.Abp.Account.AccountTwoFactorSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateTwoFactorAsyncByInput": {
+              "uniqueName": "UpdateTwoFactorAsyncByInput",
+              "name": "UpdateTwoFactorAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings/two-factor",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Account.AccountTwoFactorSettingsDto, Volo.Abp.Account.Pro.Admin.Application.Contracts",
+                  "type": "Volo.Abp.Account.AccountTwoFactorSettingsDto",
+                  "typeSimple": "Volo.Abp.Account.AccountTwoFactorSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Account.AccountTwoFactorSettingsDto",
+                  "typeSimple": "Volo.Abp.Account.AccountTwoFactorSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "GetRecaptchaAsync": {
+              "uniqueName": "GetRecaptchaAsync",
+              "name": "GetRecaptchaAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings/recaptcha",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Account.AccountRecaptchaSettingsDto",
+                "typeSimple": "Volo.Abp.Account.AccountRecaptchaSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateRecaptchaAsyncByInput": {
+              "uniqueName": "UpdateRecaptchaAsyncByInput",
+              "name": "UpdateRecaptchaAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings/recaptcha",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Account.AccountRecaptchaSettingsDto, Volo.Abp.Account.Pro.Admin.Application.Contracts",
+                  "type": "Volo.Abp.Account.AccountRecaptchaSettingsDto",
+                  "typeSimple": "Volo.Abp.Account.AccountRecaptchaSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Account.AccountRecaptchaSettingsDto",
+                  "typeSimple": "Volo.Abp.Account.AccountRecaptchaSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "GetExternalProviderAsync": {
+              "uniqueName": "GetExternalProviderAsync",
+              "name": "GetExternalProviderAsync",
+              "httpMethod": "GET",
+              "url": "api/account-admin/settings/external-provider",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.Account.AccountExternalProviderSettingsDto",
+                "typeSimple": "Volo.Abp.Account.AccountExternalProviderSettingsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            },
+            "UpdateExternalProviderAsyncByInput": {
+              "uniqueName": "UpdateExternalProviderAsyncByInput",
+              "name": "UpdateExternalProviderAsync",
+              "httpMethod": "PUT",
+              "url": "api/account-admin/settings/external-provider",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "System.Collections.Generic.List`1[[Volo.Abp.Account.UpdateExternalProviderDto, Volo.Abp.Account.Pro.Admin.Application.Contracts, Version=5.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.List<Volo.Abp.Account.UpdateExternalProviderDto>",
+                  "typeSimple": "[Volo.Abp.Account.UpdateExternalProviderDto]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.List<Volo.Abp.Account.UpdateExternalProviderDto>",
+                  "typeSimple": "[Volo.Abp.Account.UpdateExternalProviderDto]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Account.IAccountSettingsAppService"
+            }
+          }
+        }
+      }
+    }
+  },
+  "types": {}
+}

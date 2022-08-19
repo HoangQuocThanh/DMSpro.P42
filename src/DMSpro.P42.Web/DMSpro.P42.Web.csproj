@@ -30,9 +30,9 @@
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.FeatureManagement.Web" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.AuditLogging.Web" Version="5.3.3" />
-    <PackageReference Include="Volo.Abp.Identity.Pro.Web" Version="5.3.3" />
-    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Web" Version="5.3.3" />
-    <PackageReference Include="Volo.Abp.Account.Pro.Public.Web.Impersonation" Version="5.3.3" />
+    <ProjectReference Include="..\..\modules\Volo.Identity.Pro\src\Volo.Abp.Identity.Pro.Web\Volo.Abp.Identity.Pro.Web.csproj" />
+    <ProjectReference Include="..\..\modules\Volo.Account.Pro\src\Volo.Abp.Account.Pro.Admin.Web\Volo.Abp.Account.Pro.Admin.Web.csproj" />
+    <ProjectReference Include="..\..\modules\Volo.Account.Pro\src\Volo.Abp.Account.Pro.Public.Web.Impersonation\Volo.Abp.Account.Pro.Public.Web.Impersonation.csproj" />
     <PackageReference Include="Volo.Abp.LeptonTheme.Management.Web" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.IdentityServer.Web" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.LanguageManagement.Web" Version="5.3.3" />

@@ -1,0 +1,263 @@
+﻿@using Microsoft.Extensions.Localization
+@using Volo.Abp.Identity.Localization
+@using Volo.Abp.BlazoriseUI.Components
+@using Volo.Abp.AspNetCore.Components 
+@inherits AbpComponentBase
+@inject AbpBlazorMessageLocalizerHelper<IdentityResource> LH
+@inject IStringLocalizerFactory LocalizerFactory
+
+@if (Settings?.AccountSettings != null)
+{
+    <Row>
+        <Column>
+            <Tabs @bind-SelectedTab="@SelectedTab">
+                <Items>
+                    <Tab Name="AccountSettingsGeneral">
+                        @L["AccountSettingsGeneral"]
+                    </Tab>
+                    @if (Settings.AccountTwoFactorSettings != null)
+                    {
+                        <Tab Name="AccountTwoFactorSettings">
+                            @L["AccountSettingsTwoFactor"]
+                        </Tab>
+                    }
+                    @if (ShouldShowCaptchaSettings())
+                    {
+                        <Tab Name="AccountCaptchaSettings">
+                            @L["Captcha"]
+                        </Tab>
+                    }
+                    @if (ShouldShowExternalProviderSettings())
+                    {
+                        <Tab Name="AccountExternalProviderSettings">
+                            @L["AccountExternalProviderSettings"]
+                        </Tab>
+                    }
+                </Items>
+                <Content>
+                    <TabPanel Name="AccountSettingsGeneral">
+                        <Form id="AccountSettingEditForm">
+                            <Field>
+                                <Check TValue="bool" @bind-Checked="@Settings.AccountSettings.IsSelfRegistrationEnabled">
+                                    @L["DisplayName:IsSelfRegistrationEnabled"]
+                                </Check>
+                            </Field>
+                            <Field>
+                                <Check TValue="bool" @bind-Checked="@Settings.AccountSettings.EnableLocalLogin">
+                                    @L["DisplayName:EnableLocalLogin"]
+                                    <FieldHelp>@L["Description:EnableLocalLogin"]</FieldHelp>
+                                </Check>
+                            </Field>
+                            <hr class="my-4"/>
+                            <Field>
+                                <SubmitButton Form="AccountSettingEditForm" Clicked="@UpdateAccountSettings" />
+                            </Field>
+                        </Form>
+                    </TabPanel>
+                    @if (Settings.AccountTwoFactorSettings != null)
+                    {
+                        <TabPanel Name="AccountTwoFactorSettings">
+                            <Form id="AccountTwoFactorSettingsEditForm">
+                                <Field>
+                                    <FieldLabel>@IdentityLocalizer["DisplayName:Abp.Identity.TwoFactorBehaviour"]</FieldLabel>
+                                    <Select TValue="Identity.Features.IdentityProTwoFactorBehaviour" @bind-SelectedValue="@Settings.AccountTwoFactorSettings.TwoFactorBehaviour">
+                                        <SelectItem Value="@Identity.Features.IdentityProTwoFactorBehaviour.Disabled">Disabled</SelectItem>
+                                        <SelectItem Value="@Identity.Features.IdentityProTwoFactorBehaviour.Optional">Optional</SelectItem>
+                                        <SelectItem Value="@Identity.Features.IdentityProTwoFactorBehaviour.Forced">Forced</SelectItem>
+                                    </Select>
+                                </Field>
+                                <Field>
+                                    <Check TValue="bool" @bind-Checked="@Settings.AccountTwoFactorSettings.UsersCanChange">
+                                        @IdentityLocalizer["DisplayName:Abp.Identity.UsersCanChange"]
+                                    </Check>
+                                </Field>
+                                <Field>
+                                    <Check TValue="bool" @bind-Checked="@Settings.AccountTwoFactorSettings.IsRememberBrowserEnabled">
+                                        @L["DisplayName:IsRememberBrowserEnabled"]
+                                    </Check>
+                                </Field>
+
+                                <hr class="my-4"/>
+
+                                <Field>
+                                    <SubmitButton Form="AccountTwoFactorSettingsEditForm" Clicked="@UpdateTwoFactorSettings" />
+                                </Field>
+                            </Form>
+                        </TabPanel>
+                    }
+                @if (ShouldShowCaptchaSettings())
+                    {
+                        <TabPanel Name="AccountCaptchaSettings">
+                            <Form id="AccountCaptchaSettingsEditForm">
+                                <Validations @ref="@AccountCaptchaSettingsValidations" Model="@Settings.AccountRecaptchaSettings" ValidateOnLoad="false">
+                                    @if (!CurrentTenant.IsAvailable)
+                                    {
+                                        <Field>
+                                            <Check TValue="bool" @bind-Checked="@Settings.AccountRecaptchaSettings.UseCaptchaOnLogin">
+                                                @L["DisplayName:UseCaptchaOnLogin"]
+                                            </Check>
+                                        </Field>
+                                        <Field>
+                                            <Check TValue="bool" @bind-Checked="@Settings.AccountRecaptchaSettings.UseCaptchaOnRegistration">
+                                                @L["DisplayName:UseCaptchaOnRegistration"]
+                                            </Check>
+                                        </Field>
+
+                                        <Validation MessageLocalizer="@LH.Localize">
+                                            <Field>
+                                                <FieldLabel>@L["DisplayName:VerifyBaseUrl"]</FieldLabel>
+                                                <TextEdit @bind-Text="@Settings.AccountRecaptchaSettings.VerifyBaseUrl">
+                                                    <Feedback>
+                                                        <ValidationError />
+                                                    </Feedback>
+                                                </TextEdit>
+                                            </Field>
+                                        </Validation>
+                                        <Validation MessageLocalizer="@LH.Localize">
+                                            <Field>
+                                                <FieldLabel>@L["DisplayName:Version"]</FieldLabel>
+                                                <NumericEdit TValue="int" Min="2" Max="3" Step="1" @bind-Value="@Settings.AccountRecaptchaSettings.Version">
+                                                    <Feedback>
+                                                        <ValidationError />
+                                                    </Feedback>
+                                                </NumericEdit >
+                                            </Field>
+                                        </Validation>
+                                    }
+                                    <Validation MessageLocalizer="@LH.Localize">
+                                        <Field>
+                                            <FieldLabel>@L["DisplayName:SiteKey"]</FieldLabel>
+                                            <TextEdit @bind-Text="@Settings.AccountRecaptchaSettings.SiteKey">
+                                                <ChildContent>
+                                                    <FieldHelp>@L["SetNullWillUseGlobalSettings"]</FieldHelp>
+                                                </ChildContent>
+                                                <Feedback>
+                                                    <ValidationError />
+                                                </Feedback>
+                                            </TextEdit>
+                                        </Field>
+                                    </Validation>
+                                    <Validation MessageLocalizer="@LH.Localize">
+                                        <Field>
+                                            <FieldLabel>@L["DisplayName:SiteSecret"]</FieldLabel>
+                                            <TextEdit @bind-Text="@Settings.AccountRecaptchaSettings.SiteSecret">
+                                                <ChildContent>
+                                                    <FieldHelp>@L["SetNullWillUseGlobalSettings"]</FieldHelp>
+                                                </ChildContent>
+                                                <Feedback>
+                                                    <ValidationError />
+                                                </Feedback>
+                                            </TextEdit>
+                                        </Field>
+                                    </Validation>
+
+                                    <hr class="my-4"/>
+
+                                    <Field>
+                                        <SubmitButton Form="AccountCaptchaSettingsEditForm" Clicked="@UpdateCaptchaSettings" />
+                                    </Field>
+                                </Validations>
+                            </Form>
+                        </TabPanel>
+                    }
+                    @if (ShouldShowExternalProviderSettings())
+                    {
+                        <TabPanel Name="AccountExternalProviderSettings">
+                            <Form id="AccountExternalProviderSettingsEditForm">
+                                @{
+                                    var defaultLocalizer = LocalizerFactory.CreateDefaultOrNull();
+                                }
+
+                                @if (CurrentTenant.IsAvailable)
+                                {
+                                    foreach (var provider in Settings.AccountExternalProviderSettings.Settings.Where(setting => setting.Enabled))
+                                    {
+                                        <Heading Size="HeadingSize.Is4">
+                                            @ExternalLoginProviderLocalizationHelper.Localize(defaultLocalizer, $"ExternalProvider:{provider.Name}", provider.Name)
+                                        </Heading>
+
+                                        <Field>
+                                            <Check
+                                                TValue="bool"
+                                                Checked="@ExternalProviderUseHostSettings[provider.Name]"
+                                                CheckedChanged="(b) => OnExternalProviderUseHostSettingsChanged(provider, b)">
+                                                @L["ExternalProviderUseHostSettings"]
+                                            </Check>
+                                        </Field>
+
+                                        if (!ExternalProviderUseHostSettings[provider.Name])
+                                        {
+                                            foreach (var property in provider.Properties)
+                                            {
+                                                <Field>
+                                                    <FieldLabel>
+                                                        @ExternalLoginProviderLocalizationHelper.Localize(defaultLocalizer, $"ExternalProvider:{provider.Name}:{property.Name}", property.Name)
+                                                    </FieldLabel>
+                                                    <TextEdit @bind-Text="@property.Value"/>
+                                                </Field>
+                                            }
+
+                                            foreach (var property in provider.SecretProperties)
+                                            {
+                                                <Field>
+                                                    <FieldLabel>
+                                                        @ExternalLoginProviderLocalizationHelper.Localize(defaultLocalizer, $"ExternalProvider:{provider.Name}:{property.Name}", property.Name)
+                                                    </FieldLabel>
+                                                    <TextEdit @bind-Text="@property.Value"/>
+                                                </Field>
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (var provider in Settings.AccountExternalProviderSettings.Settings)
+                                    {
+                                        <Heading Size="HeadingSize.Is4">
+                                            @ExternalLoginProviderLocalizationHelper.Localize(defaultLocalizer, $"ExternalProvider:{provider.Name}", provider.Name)
+                                        </Heading>
+
+                                        <Field>
+                                            <Check TValue="bool" @bind-Checked="@provider.Enabled">
+                                                @L["ExternalProviderEnabled"]
+                                            </Check>
+                                        </Field>
+
+                                        if (provider.Enabled)
+                                        {
+                                            foreach (var property in provider.Properties)
+                                            {
+                                                <Field>
+                                                    <FieldLabel>
+                                                        @ExternalLoginProviderLocalizationHelper.Localize(defaultLocalizer, $"ExternalProvider:{provider.Name}:{property.Name}", property.Name)
+                                                    </FieldLabel>
+                                                    <TextEdit @bind-Text="@property.Value"/>
+                                                </Field>
+                                            }
+
+                                            foreach (var property in provider.SecretProperties)
+                                            {
+                                                <Field>
+                                                    <FieldLabel>
+                                                        @ExternalLoginProviderLocalizationHelper.Localize(defaultLocalizer, $"ExternalProvider:{provider.Name}:{property.Name}", property.Name)
+                                                    </FieldLabel>
+                                                    <TextEdit @bind-Text="@property.Value"/>
+                                                </Field>
+                                            }
+                                        }
+                                    }
+                                }
+
+                                <hr class="my-4"/>
+
+                                <Field>
+                                    <SubmitButton Form="AccountExternalProviderSettingsEditForm" Clicked="@UpdateExternalProviderSettings" />
+                                </Field>
+                            </Form>
+                        </TabPanel>
+                    }
+                </Content>
+            </Tabs>
+        </Column>
+    </Row>
+}

@@ -1,0 +1,60 @@
+﻿@using DMSpro.P42.MDM.Companies
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Text.Json
+@using System.Security.Claims
+@using Volo.Abp.Identity.Localization
+@using Volo.Abp.Security.Claims
+@using Volo.Abp.Users
+@inject IHtmlLocalizer<IdentityResource> L
+@inject ICurrentUser CurrentUser
+@inject ICurrentPrincipalAccessor PrincipalAccessor
+
+@{
+    List<CompanyDto> listCom = new List<CompanyDto>();
+
+    if (CurrentUser.IsAuthenticated)
+    {
+        var claimCurCompany = CurrentUser.FindClaimValue(CompanyConsts.CurrentCompany);
+        var claimListCompany = CurrentUser.FindClaimValue(CompanyConsts.ListCompany);
+        if (claimCurCompany is not null)
+        {
+            var curCom = JsonSerializer.Deserialize<CompanyDto>(claimCurCompany);
+            listCom = JsonSerializer.Deserialize<List<CompanyDto>>(claimListCompany);
+            <abp-dropdown>
+                <abp-dropdown-button size="Small" button-type="Primary" text="@curCom?.Name" />
+                <abp-dropdown-menu>
+                    @foreach (var com in listCom.Where(x => x.Id != curCom.Id))
+                    {
+                        <abp-dropdown-item style="cursor: pointer" id="@com.Id" onclick="changeCom('@com.Id', '@CurrentUser.Id')">@com.Name</abp-dropdown-item>
+                    }
+                </abp-dropdown-menu>
+            </abp-dropdown>
+        }
+    }
+
+//    <form method="post" data-ajaxForm="false" action="~/Account/ImpersonateUser" id="ImpersonationForm">
+//        <input type="hidden" name="UserId">
+//    </form>
+
+//    void ChangeCompany(Guid id)
+//    {
+//        var identity = PrincipalAccessor.Principal.Identity as ClaimsIdentity;
+//        var curCom = identity.FindFirst(CompanyConsts.CurrentCompany);
+//        if (curCom is not null)
+//        {
+//            identity.RemoveClaim(curCom);
+//        }
+//        var com = listCom.First(x => x.Id == id);
+//        identity.AddClaim(new Claim(CompanyConsts.CurrentCompany, JsonSerializer.Serialize(com)));
+
+//    }
+//}
+
+<script>
+    function changeCom(id, u) {
+        console.log(id);
+        //$("#ImpersonationForm input[name='UserId']").val(u);
+        //$("#ImpersonationForm").submit();
+    }
+</script>
+

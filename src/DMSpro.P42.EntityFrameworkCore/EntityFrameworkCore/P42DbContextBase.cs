@@ -61,5 +61,6 @@ public abstract class P42DbContextBase<TDbContext> : AbpDbContext<TDbContext>
         //}
         builder.ConfigureSO();
             builder.ConfigureMDM();
+            builder.ConfigureIdentity();
         }
 }

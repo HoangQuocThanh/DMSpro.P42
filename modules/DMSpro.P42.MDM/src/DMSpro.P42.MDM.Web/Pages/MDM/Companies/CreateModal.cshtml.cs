@@ -15,6 +15,9 @@ namespace DMSpro.P42.MDM.Web.Pages.MDM.Companies
         [BindProperty]
         public CompanyCreateDto Company { get; set; }
 
+        [BindProperty]
+        public List<Guid> SelectedIdentityUserIds { get; set; }
+
         private readonly ICompaniesAppService _companiesAppService;
 
         public CreateModalModel(ICompaniesAppService companiesAppService)
@@ -31,6 +34,8 @@ namespace DMSpro.P42.MDM.Web.Pages.MDM.Companies
 
         public async Task<IActionResult> OnPostAsync()
         {
+
+            Company.IdentityUserIds = SelectedIdentityUserIds;
 
             await _companiesAppService.CreateAsync(Company);
             return NoContent();

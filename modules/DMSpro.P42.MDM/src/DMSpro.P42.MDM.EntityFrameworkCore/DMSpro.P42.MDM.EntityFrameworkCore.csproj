@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.3.3" />
+    <ProjectReference Include="..\..\..\Volo.Identity.Pro\src\Volo.Abp.Identity.Pro.EntityFrameworkCore\Volo.Abp.Identity.Pro.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\DMSpro.P42.MDM.Domain\DMSpro.P42.MDM.Domain.csproj" />
   </ItemGroup>
 

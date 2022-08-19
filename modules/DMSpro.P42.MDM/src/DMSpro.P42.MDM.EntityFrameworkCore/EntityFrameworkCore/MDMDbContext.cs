@@ -3,6 +3,7 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Identity.EntityFrameworkCore;
 
 namespace DMSpro.P42.MDM.EntityFrameworkCore;
 
@@ -24,6 +25,7 @@ public class MDMDbContext : AbpDbContext<MDMDbContext>, IMDMDbContext
     {
         base.OnModelCreating(builder);
 
+        builder.ConfigureIdentityPro();
         builder.ConfigureMDM();
     }
 }

@@ -77,6 +77,17 @@
     }
   ],
   "NavigationProperties": [],
-  "NavigationConnections": [],
+  "NavigationConnections": [
+    {
+      "Name": "IdentityUsers",
+      "DisplayProperty": "Name",
+      "Namespace": "Volo.Abp.Identity",
+      "EntityName": "IdentityUser",
+      "EntitySetName": "IdentityUsers",
+      "DtoNamespace": "Volo.Abp.Identity",
+      "DtoEntityName": "IdentityUserDto",
+      "Type": "Guid"
+    }
+  ],
   "PhysicalFileName": "Company.json"
 }

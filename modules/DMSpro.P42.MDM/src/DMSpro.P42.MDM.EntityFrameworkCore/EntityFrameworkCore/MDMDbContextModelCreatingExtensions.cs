@@ -2,6 +2,7 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using DMSpro.P42.MDM.Companies;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.Identity;
 
 namespace DMSpro.P42.MDM.EntityFrameworkCore;
 
@@ -31,6 +32,7 @@ public static class MDMDbContextModelCreatingExtensions
             b.HasIndex(q => q.CreationTime);
         });
         */
+
         builder.Entity<Company>(b =>
     {
         b.ToTable(MDMDbProperties.DbTablePrefix + "Companies", MDMDbProperties.DbSchema);
@@ -39,6 +41,24 @@ public static class MDMDbContextModelCreatingExtensions
         b.Property(x => x.Code).HasColumnName(nameof(Company.Code)).IsRequired().HasMaxLength(CompanyConsts.CodeMaxLength);
         b.Property(x => x.Name).HasColumnName(nameof(Company.Name)).IsRequired().HasMaxLength(CompanyConsts.NameMaxLength);
         b.Property(x => x.Address1).HasColumnName(nameof(Company.Address1));
+        b.HasMany(x => x.IdentityUsers).WithOne().HasForeignKey(x => x.CompanyId).IsRequired().OnDelete(DeleteBehavior.NoAction);
     });
+
+        builder.Entity<CompanyIdentityUser>(b =>
+{
+    b.ToTable(MDMDbProperties.DbTablePrefix + "CompanyIdentityUser" + MDMDbProperties.DbSchema);
+    b.ConfigureByConvention();
+
+    b.HasKey(
+    x => new { x.CompanyId, x.IdentityUserId }
+    );
+
+    b.HasOne<Company>().WithMany(x => x.IdentityUsers).HasForeignKey(x => x.CompanyId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+    b.HasOne<IdentityUser>().WithMany().HasForeignKey(x => x.IdentityUserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+
+    b.HasIndex(
+        x => new { x.CompanyId, x.IdentityUserId }
+    );
+});
     }
 }

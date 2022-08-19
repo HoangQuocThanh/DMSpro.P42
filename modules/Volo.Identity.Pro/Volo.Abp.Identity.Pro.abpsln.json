@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Volo.Abp.Identity.Pro": {
+      "path": "Volo.Abp.Identity.Pro.abpmdl.json"
+    }
+  }
+}

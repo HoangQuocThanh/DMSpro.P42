@@ -17,12 +17,17 @@ public class MDMPermissions
         public const string Edit = Default + ".Edit";
         public const string Create = Default + ".Create";
         public const string Delete = Default + ".Delete";
+        public const string Import = Default + ".Import";
     }
-    public class Users
-    {
-        public const string Default = GroupName + ".Users";
-        public const string Edit = Default + ".Edit";
-        public const string Create = Default + ".Create";
-        public const string Delete = Default + ".Delete";
-    }
+    //public static class Users
+    //{
+    //    public const string Default = GroupName + ".Users";
+    //    public const string Create = Default + ".Create";
+    //    public const string Update = Default + ".Update";
+    //    public const string Delete = Default + ".Delete";
+    //    public const string ManagePermissions = Default + ".ManagePermissions";
+    //    public const string ViewChangeHistory = "AuditLogging.ViewChangeHistory:Volo.Abp.Identity.IdentityUser";
+    //    public const string Impersonation = Default + ".Impersonation";
+    //    public const string Import = Default + ".Import";
+    //}
 }

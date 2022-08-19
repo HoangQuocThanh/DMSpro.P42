@@ -9,6 +9,10 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using DMSpro.P42.MDM.Permissions;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.PageToolbars;
+using Volo.Abp.Localization;
+using DMSpro.P42.MDM.Web.Pages.MDM.Companies.ImportToolbar;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 
 namespace DMSpro.P42.MDM.Web;
 
@@ -54,6 +58,28 @@ public class MDMWebModule : AbpModule
         {
             //Configure authorization.
             options.Conventions.AuthorizePage("/Companies/Index", MDMPermissions.Companies.Default);
+        });
+
+        Configure<AbpPageToolbarOptions>(options =>
+        {
+            options.Configure<Pages.MDM.Companies.IndexModel>(
+                toolbar =>
+                {
+                    toolbar.AddComponent<ImportDropdownViewComponent>(requiredPolicyName: MDMPermissions.Companies.Import);
+
+                    toolbar.AddButton(
+                        LocalizableString.Create<MDMResource>("ImportExcel"),
+                        icon: "excel",
+                        name: "ImportExcel",
+                        requiredPolicyName: MDMPermissions.Companies.Create
+                    );
+                }
+            );
+        });
+
+        Configure<AbpToolbarOptions>(options =>
+        {
+            options.Contributors.Add(new MDMToolbarContributor());
         });
     }
 }

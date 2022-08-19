@@ -1,4 +1,5 @@
 using DMSpro.P42.MDM.Shared;
+using Volo.Abp.Identity;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -19,6 +20,10 @@ namespace DMSpro.P42.MDM.Web.Pages.MDM.Companies
         [BindProperty]
         public CompanyUpdateDto Company { get; set; }
 
+        public List<IdentityUserDto> IdentityUsers { get; set; }
+        [BindProperty]
+        public List<Guid> SelectedIdentityUserIds { get; set; }
+
         private readonly ICompaniesAppService _companiesAppService;
 
         public EditModalModel(ICompaniesAppService companiesAppService)
@@ -28,13 +33,17 @@ namespace DMSpro.P42.MDM.Web.Pages.MDM.Companies
 
         public async Task OnGetAsync()
         {
-            var company = await _companiesAppService.GetAsync(Id);
-            Company = ObjectMapper.Map<CompanyDto, CompanyUpdateDto>(company);
+            var companyWithNavigationPropertiesDto = await _companiesAppService.GetWithNavigationPropertiesAsync(Id);
+            Company = ObjectMapper.Map<CompanyDto, CompanyUpdateDto>(companyWithNavigationPropertiesDto.Company);
+
+            IdentityUsers = companyWithNavigationPropertiesDto.IdentityUsers;
 
         }
 
         public async Task<NoContentResult> OnPostAsync()
         {
+
+            Company.IdentityUserIds = SelectedIdentityUserIds;
 
             await _companiesAppService.UpdateAsync(Id, Company);
             return NoContent();

@@ -24,6 +24,8 @@ namespace DMSpro.P42.MDM.Companies
         [CanBeNull]
         public virtual string Address1 { get; set; }
 
+        public ICollection<CompanyIdentityUser> IdentityUsers { get; private set; }
+
         public Company()
         {
 
@@ -40,7 +42,47 @@ namespace DMSpro.P42.MDM.Companies
             Code = code;
             Name = name;
             Address1 = address1;
+            IdentityUsers = new Collection<CompanyIdentityUser>();
+        }
+        public void AddIdentityUser(Guid identityUserId)
+        {
+            Check.NotNull(identityUserId, nameof(identityUserId));
+
+            if (IsInIdentityUsers(identityUserId))
+            {
+                return;
+            }
+
+            IdentityUsers.Add(new CompanyIdentityUser(Id, identityUserId));
         }
 
+        public void RemoveIdentityUser(Guid identityUserId)
+        {
+            Check.NotNull(identityUserId, nameof(identityUserId));
+
+            if (!IsInIdentityUsers(identityUserId))
+            {
+                return;
+            }
+
+            IdentityUsers.RemoveAll(x => x.IdentityUserId == identityUserId);
+        }
+
+        public void RemoveAllIdentityUsersExceptGivenIds(List<Guid> identityUserIds)
+        {
+            Check.NotNullOrEmpty(identityUserIds, nameof(identityUserIds));
+
+            IdentityUsers.RemoveAll(x => !identityUserIds.Contains(x.IdentityUserId));
+        }
+
+        public void RemoveAllIdentityUsers()
+        {
+            IdentityUsers.RemoveAll(x => x.CompanyId == Id);
+        }
+
+        private bool IsInIdentityUsers(Guid identityUserId)
+        {
+            return IdentityUsers.Any(x => x.IdentityUserId == identityUserId);
+        }
     }
 }

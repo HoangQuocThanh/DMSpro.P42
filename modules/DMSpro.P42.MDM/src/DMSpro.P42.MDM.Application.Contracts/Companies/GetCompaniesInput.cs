@@ -10,6 +10,7 @@ namespace DMSpro.P42.MDM.Companies
         public string Code { get; set; }
         public string Name { get; set; }
         public string Address1 { get; set; }
+        public Guid? IdentityUserId { get; set; }
 
         public GetCompaniesInput()
         {

@@ -1,3 +1,4 @@
+using Volo.Abp.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,64 @@ namespace DMSpro.P42.MDM.Companies
             : base(dbContextProvider)
         {
 
+        }
+
+        public async Task<CompanyWithNavigationProperties> GetWithNavigationPropertiesAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            var dbContext = await GetDbContextAsync();
+
+            return (await GetDbSetAsync()).Where(b => b.Id == id).Include(x => x.IdentityUsers)
+                .Select(company => new CompanyWithNavigationProperties
+                {
+                    Company = company,
+                    IdentityUsers = (from companyIdentityUsers in company.IdentityUsers
+                                     join _identityUser in dbContext.Set<IdentityUser>() on companyIdentityUsers.IdentityUserId equals _identityUser.Id
+                                     select _identityUser).ToList()
+                }).FirstOrDefault();
+        }
+
+        public async Task<List<CompanyWithNavigationProperties>> GetListWithNavigationPropertiesAsync(
+            string filterText = null,
+            string code = null,
+            string name = null,
+            string address1 = null,
+            Guid? identityUserId = null,
+            string sorting = null,
+            int maxResultCount = int.MaxValue,
+            int skipCount = 0,
+            CancellationToken cancellationToken = default)
+        {
+            var query = await GetQueryForNavigationPropertiesAsync();
+            query = ApplyFilter(query, filterText, code, name, address1, identityUserId);
+            query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? CompanyConsts.GetDefaultSorting(true) : sorting);
+            return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
+        }
+
+        protected virtual async Task<IQueryable<CompanyWithNavigationProperties>> GetQueryForNavigationPropertiesAsync()
+        {
+            return from company in (await GetDbSetAsync())
+
+                   select new CompanyWithNavigationProperties
+                   {
+                       Company = company,
+                       IdentityUsers = new List<IdentityUser>()
+                   };
+        }
+
+        protected virtual IQueryable<CompanyWithNavigationProperties> ApplyFilter(
+            IQueryable<CompanyWithNavigationProperties> query,
+            string filterText,
+            string code = null,
+            string name = null,
+            string address1 = null,
+            Guid? identityUserId = null)
+        {
+            return query
+                .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => e.Company.Code.Contains(filterText) || e.Company.Name.Contains(filterText) || e.Company.Address1.Contains(filterText))
+                    .WhereIf(!string.IsNullOrWhiteSpace(code), e => e.Company.Code.Contains(code))
+                    .WhereIf(!string.IsNullOrWhiteSpace(name), e => e.Company.Name.Contains(name))
+                    .WhereIf(!string.IsNullOrWhiteSpace(address1), e => e.Company.Address1.Contains(address1))
+                    .WhereIf(identityUserId != null && identityUserId != Guid.Empty, e => e.Company.IdentityUsers.Any(x => x.IdentityUserId == identityUserId));
         }
 
         public async Task<List<Company>> GetListAsync(
@@ -39,9 +98,11 @@ namespace DMSpro.P42.MDM.Companies
             string code = null,
             string name = null,
             string address1 = null,
+            Guid? identityUserId = null,
             CancellationToken cancellationToken = default)
         {
-            var query = ApplyFilter((await GetDbSetAsync()), filterText, code, name, address1);
+            var query = await GetQueryForNavigationPropertiesAsync();
+            query = ApplyFilter(query, filterText, code, name, address1, identityUserId);
             return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 

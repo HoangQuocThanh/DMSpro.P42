@@ -21,7 +21,7 @@
     <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain" Version="5.3.3" />
-    <PackageReference Include="Volo.Abp.Identity.Pro.Domain" Version="5.3.3" />
+    <ProjectReference Include="..\..\modules\Volo.Identity.Pro\src\Volo.Abp.Identity.Pro.Domain\Volo.Abp.Identity.Pro.Domain.csproj" />
     <PackageReference Include="Volo.Abp.LanguageManagement.Domain" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.LeptonTheme.Management.Domain" Version="5.3.3" />
     <PackageReference Include="Volo.Saas.Domain" Version="5.3.3" />

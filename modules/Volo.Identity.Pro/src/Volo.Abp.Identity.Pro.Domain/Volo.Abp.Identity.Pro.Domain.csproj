@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    
+    
+
+    <PropertyGroup><LangVersion>latest</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <AssemblyName>Volo.Abp.Identity.Pro.Domain</AssemblyName>
+        <PackageId>Volo.Abp.Identity.Pro.Domain</PackageId>
+        <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+        <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+        <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+        <RootNamespace />
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="IdentityModel" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="$(MicrosoftPackageVersion)" />
+        <ProjectReference Include="..\Volo.Abp.Identity.Pro.Domain.Shared\Volo.Abp.Identity.Pro.Domain.Shared.csproj" />
+        <PackageReference Include="Volo.Abp.Ldap" Version="5.3.3" />
+        <PackageReference Include="Volo.Abp.Caching" Version="5.3.3" />
+        <PackageReference Include="Volo.Abp.Gdpr.Abstractions" Version="5.3.3" />
+        <PackageReference Include="Volo.Abp.Identity.Domain" Version="5.3.3" />
+        <PackageReference Include="Volo.Abp.Commercial.Core" Version="5.3.3" />
+    </ItemGroup>
+    
+</Project>

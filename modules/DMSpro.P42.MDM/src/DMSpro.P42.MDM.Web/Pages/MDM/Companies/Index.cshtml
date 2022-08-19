@@ -53,6 +53,17 @@
             <abp-column size="_3">
                 <abp-input asp-for="Address1Filter" label="@L["Address1"].Value" />
             </abp-column>
+            <abp-column size="_3">
+                <div class="form-group">
+                    <label class="mb-2" id-for="IdentityUserFilter">@L["IdentityUser"]</label>
+                    <select id="IdentityUserFilter"
+                            name="IdentityUserFilter"
+                            class="custom-select form-control"
+                            style="width: 100%"
+                            data-value="">
+                    </select>
+                </div>
+            </abp-column> 
         </abp-row>
 
         <abp-table striped-rows="true" id="CompaniesTable">

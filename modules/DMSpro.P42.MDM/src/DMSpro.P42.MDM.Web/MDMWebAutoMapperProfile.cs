@@ -13,5 +13,7 @@ public class MDMWebAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
 
         CreateMap<CompanyDto, CompanyUpdateDto>();
+
+        CreateMap<CompanyDto, CompanyUpdateDto>().Ignore(x => x.IdentityUserIds);
     }
 }

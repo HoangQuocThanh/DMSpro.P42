@@ -16,6 +16,8 @@
         <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
 
         <abp-modal-body>
+             <abp-tabs>
+                <abp-tab title="@L["Company"].Value">
                     <abp-input asp-for="Id" />
                     <abp-input asp-for="Company.ConcurrencyStamp" hidden="true" suppress-label="true"/>
                     
@@ -26,7 +28,48 @@
             <abp-input asp-for="Company.Address1"/>
 
                     
-                
+                </abp-tab>
+                                 <abp-tab title="@L["IdentityUsers"].Value">
+                 
+                    <div class="input-group mb-3">
+                        <select id="IdentityUserLookup"
+                                        name="IdentityUserLookup"
+                                        class="custom-select form-control"
+                                        style="width: 85%"
+                                        data-value="">
+                        </select>
+                        <abp-button button-type="Info" id="AddIdentityUserButton" class="text-light">@L["Add"]</abp-button>
+                    </div>
+
+                    <abp-row>
+                        <abp-table style="@(Model.IdentityUsers.Any() ? "": "display:none")" id="IdentityUserTable">
+                            <thead Theme="Dark">
+                            <tr style="text-align: center; vertical-align: middle;">
+                                <th scope="Column" style="text-align: left">@L["Name"]</th>
+                                <th scope="Column"></th>
+                            </tr>
+                            </thead>
+                            <tbody id="IdentityUserTableRows">
+                            @for (var index = 0; index < Model.IdentityUsers.Count; index++)
+                            {
+                                <tr style="text-align: center; vertical-align: middle;" index="@index">
+                                    <td style="display: none" name="id" display-name="@Model.IdentityUsers[index].Name" index="@index">@Model.IdentityUsers[index].Id</td>
+                                    <td style="display: none">
+                                        <input value="@Model.IdentityUsers[index].Id" id="SelectedIdentityUserIds[@index]" name="SelectedIdentityUserIds[@index]"/>
+                                    </td>
+                                    <td style="text-align: left">@Model.IdentityUsers[index].Name</td>
+                                    <td style="text-align: right">
+                                        <abp-button button-type="Danger" size="Small" class="text-light identityUserDeleteButton" index="@index"> <i class="fa fa-trash"></i> </abp-button>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </abp-table>
+                    </abp-row>
+
+                </abp-tab>
+
+            </abp-tabs>
         </abp-modal-body>
 
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>

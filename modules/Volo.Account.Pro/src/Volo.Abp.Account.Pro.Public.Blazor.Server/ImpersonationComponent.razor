@@ -1,0 +1,8 @@
+﻿@using Microsoft.Extensions.Localization
+@using Volo.Abp.Account.Localization
+@inject IStringLocalizer<AccountResource> L
+<form method="post" action="/Account/BackToImpersonator">
+    <button type="submit" class="btn text-danger" data-bs-toggle="tooltip" data-bs-placement="left" title="@L["BackToImpersonator"]">
+        <i class="fa fa-undo"></i>
+    </button>
+</form>

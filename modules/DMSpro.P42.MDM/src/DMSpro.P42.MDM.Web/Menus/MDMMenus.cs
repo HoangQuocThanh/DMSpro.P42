@@ -5,6 +5,4 @@ public class MDMMenus
     public const string Prefix = "MDM";
 
     public const string Companies = Prefix + ".Companies";
-    public const string Users = Prefix + ".Users";
-
 }

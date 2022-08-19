@@ -1,3 +1,4 @@
+using DMSpro.P42.MDM.Shared;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -7,9 +8,13 @@ namespace DMSpro.P42.MDM.Companies
 {
     public interface ICompaniesAppService : IApplicationService
     {
-        Task<PagedResultDto<CompanyDto>> GetListAsync(GetCompaniesInput input);
+        Task<PagedResultDto<CompanyWithNavigationPropertiesDto>> GetListAsync(GetCompaniesInput input);
+
+        Task<CompanyWithNavigationPropertiesDto> GetWithNavigationPropertiesAsync(Guid id);
 
         Task<CompanyDto> GetAsync(Guid id);
+
+        Task<PagedResultDto<LookupDto<Guid>>> GetIdentityUserLookupAsync(LookupRequestDto input);
 
         Task DeleteAsync(Guid id);
 

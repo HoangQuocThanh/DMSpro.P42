@@ -78,5 +78,7 @@ namespace DMSpro.P42;
 #if DEBUG
         context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
 #endif
+
+       
     }
 }

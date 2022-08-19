@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  
+  
+
+  <PropertyGroup><LangVersion>latest</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Volo.Abp.Account.Pro.Public.Application.Contracts</AssemblyName>
+    <PackageId>Volo.Abp.Account.Pro.Public.Application.Contracts</PackageId>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Volo.Abp.Account.Pro.Shared.Application.Contracts\Volo.Abp.Account.Pro.Shared.Application.Contracts.csproj" />
+    <PackageReference Include="Volo.Abp.Emailing" Version="5.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Volo\Abp\Account\Emailing\Templates\*.tpl" />
+    <None Remove="Volo\Abp\Account\Emailing\Templates\*.tpl" />
+  </ItemGroup>
+
+</Project>

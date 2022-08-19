@@ -16,7 +16,7 @@
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain.Shared" Version="5.3.3" />
-    <PackageReference Include="Volo.Abp.Identity.Pro.Domain.Shared" Version="5.3.3" />
+    <ProjectReference Include="..\..\modules\Volo.Identity.Pro\src\Volo.Abp.Identity.Pro.Domain.Shared\Volo.Abp.Identity.Pro.Domain.Shared.csproj" />
     <PackageReference Include="Volo.Abp.LanguageManagement.Domain.Shared" Version="5.3.3" />
     <PackageReference Include="Volo.Saas.Domain.Shared" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.TextTemplateManagement.Domain.Shared" Version="5.3.3" />

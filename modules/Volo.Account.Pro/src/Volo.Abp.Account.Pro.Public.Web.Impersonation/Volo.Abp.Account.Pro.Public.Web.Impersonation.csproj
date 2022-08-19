@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    
+    
+
+    <PropertyGroup><LangVersion>latest</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <PackageId>Volo.Abp.Account.Pro.Public.Web.Impersonation</PackageId>
+        <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+        <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+        <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <IsPackable>true</IsPackable>
+        <OutputType>Library</OutputType>
+        <RootNamespace>Volo.Abp.Account.Public.Web.Impersonation</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="5.3.3" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="5.3.3" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="5.3.3" />
+    </ItemGroup>
+
+</Project>
