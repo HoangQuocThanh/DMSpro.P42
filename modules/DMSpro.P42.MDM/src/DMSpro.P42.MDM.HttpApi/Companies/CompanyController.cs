@@ -27,13 +27,17 @@ namespace DMSpro.P42.MDM.Companies
         }
 
         /*ThanhHQ*/
+        //[HttpPost("get-all")]
         [HttpGet]
         public async Task<LoadResult> GetAllAsync(DataSourceLoadOptionsBase loadOptions)
         {
-            SortingInfo[] arr = { new SortingInfo { Selector = "Code", Desc = true } };
-            loadOptions.Sort = arr;
             return await _companiesAppService.GetAllAsync(loadOptions);
         }
+
+        //public async Task<LoadResult> GetAllAsync(DataSourceLoadOptions loadOptions)
+        //{
+        //    return await _companiesAppService.GetAllAsync(loadOptions);
+        //}
 
         [HttpGet("input")]
         public Task<PagedResultDto<CompanyWithNavigationPropertiesDto>> GetListAsync(GetCompaniesInput input)

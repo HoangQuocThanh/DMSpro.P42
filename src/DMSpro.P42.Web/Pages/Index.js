@@ -8,7 +8,7 @@
             method,
             data,
             dataType: 'json',
-            //contentType: 'application/json;charset=UTF-8',
+            contentType: 'application/json;charset=UTF-8',
             cache: false,
             xhrFields: { withCredentials: true },
         }).done((result) => {
@@ -60,15 +60,37 @@
         load(loadOptions) {
 
             const deferred = $.Deferred();
-            
-            console.log(JSON.stringify({ loadOptions: loadOptions }));
+
+            const params = {};
+
+            [
+                "filter",
+                "group",
+                "groupSummary",
+                "parentIds",
+                "requireGroupCount",
+                "requireTotalCount",
+                "searchExpr",
+                "searchOperation",
+                "searchValue",
+                "select",
+                "sort",
+                "skip",
+                "take",
+                "totalSummary",
+                "userData"
+            ].forEach(function (i) {
+                if (i in loadOptions && isNotEmpty(loadOptions[i])) {
+                    params[i] = JSON.stringify(loadOptions[i]);
+                }
+            });
 
             $.ajax({
-                url: url,
+                url: `${url}`,
                 dataType: 'json',
-                type: 'GET',
-                contentType: 'application/json;charset=UTF-8',
-                data: loadOptions,
+                type: 'get',
+                //contentType: 'application/json;charset=UTF-8',
+                data: params, //JSON.stringify(loadOptions),
                 success(result) {
                     console.log(result);
                     deferred.resolve(result, {
@@ -87,46 +109,79 @@
         },
     });
 
+    var customDataSource = new DevExpress.data.CustomStore({
+        key: "id",
+        load: function (loadOptions) {
+            var d = $.Deferred();
+            var params = {};
+
+            [
+                "filter",
+                "group",
+                "groupSummary",
+                "parentIds",
+                "requireGroupCount",
+                "requireTotalCount",
+                //"searchExpr",
+                //"searchOperation",
+                //"searchValue",
+                "select",
+                "sort",
+                "skip",
+                "take",
+                "totalSummary",
+                //"userData"
+            ].forEach(function (i) {
+                if (i in loadOptions && isNotEmpty(loadOptions[i])) {
+                    params[i] = JSON.stringify(loadOptions[i]);
+                }
+            });
+
+            $.getJSON(url, params)
+                .done(function (response) {
+                    d.resolve(response.data, {
+                        totalCount: response.totalCount,
+                        summary: response.summary,
+                        groupCount: response.groupCount
+                    });
+                })
+                .fail(function () { throw "Data loading error" });
+            return d.promise();
+        },
+        // Needed to process selected value(s) in the SelectBox, Lookup, Autocomplete, and DropDownBox
+        // byKey: function(key) {
+        //     var d = new $.Deferred();
+        //     $.get('https://mydomain.com/MyDataService?id=' + key)
+        //         .done(function(result) {
+        //             d.resolve(result);
+        //         });
+        //     return d.promise();
+        // }
+    });
+
     const comsStore = new DevExpress.data.CustomStore({
         key: 'id',
         load(loadOptions) {
             console.log(loadOptions);
-            return sendRequest(`${url}`, 'GET', loadOptions);
+            return sendRequest(`${url}/get-all`, 'POST', JSON.stringify(loadOptions));
         },
         insert(values) {
             return sendRequest(`${url}`, 'POST',
                 JSON.stringify(values));
         },
         update(key, values) {
-            return sendRequest(`${url}/${key}`, 'PUT',
-                JSON.stringify(values));
+            return sendRequest(`${url}/${key}`, 'PUT', JSON.stringify(values));
         },
         remove(key) {
-            return sendRequest(`${url}/${key}`, 'DELETE', JSON.stringify({
-                id: key
-            }));
+            return sendRequest(`${url}/${key}`, 'DELETE', JSON.stringify(key));
         },
     });
 
     $('#gridContainer').dxDataGrid({
-        //dataSource: DevExpress.data.AspNet.createStore({
-        //    key: 'id',
-        //    loadUrl: `${url}`,
-        //    insertUrl: `${url}`,
-        //    updateUrl: `${url}`,
-        //    deleteUrl: `${url}`,
-        //    onBeforeSend(method, ajaxOptions) {
-        //        ajaxOptions.xhrFields = { withCredentials: true };
-        //    },
-        //}),
-        dataSource: comsStore,
+        dataSource: customDataSource,
+
         showBorders: true,
-        paging: {
-            pageSize: 2,
-        },
-        //sorting: {
-        //    mode: 'multiple',
-        //},
+
         remoteOperations: true,
 
         columns: [
@@ -141,6 +196,7 @@
             {
                 dataField: 'address1',
                 caption: l('Address'),
+                visible: false
             },
         ],
         //editing: {
@@ -149,27 +205,48 @@
         //    allowDeleting: true,
         //    allowAdding: true,
         //},
-        //        allowColumnReordering: true,
-//        allowColumnResizing: true,
-//        columnAutoWidth: true,
-//        columnChooser: {
-//            enabled: true,
-//        },
-//        columnFixing: {
-//            enabled: true,
-//        },
-//        filterRow: {
-//            visible: true,
-//            applyFilter: 'auto',
-//        },
-//        searchPanel: {
-//            visible: true,
-//            width: 240,
-//            placeholder: 'Search...',
-//        },
-//        headerFilter: {
-//            visible: true,
-//        },
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        columnAutoWidth: true,
+        columnChooser: {
+            enabled: true,
+        },
+        columnFixing: {
+            enabled: true,
+        },
+        filterRow: {
+            visible: true,
+        },
+        headerFilter: {
+            visible: true,
+        },
+        
+        scrolling: {
+            mode: 'virtual',
+        },
+        height: 600,
+
+        groupPanel: {
+            visible: true,
+        },
+        grouping: {
+            autoExpandAll: false,
+        },
+        //paging: {
+        //    pageSize: 2,
+        //},
+        //sorting: {
+        //    mode: 'multiple',
+        //},
+        //filterRow: {
+        //    visible: true,
+        //    applyFilter: 'auto',
+        //},
+        //searchPanel: {
+        //    visible: true,
+        //    width: 240,
+        //    placeholder: 'Search...',
+        //},
         //summary: {
         //    totalItems: [{
         //        column: 'code',

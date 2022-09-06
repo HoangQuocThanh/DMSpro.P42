@@ -36,9 +36,9 @@ namespace DMSpro.P42.MDM.Companies
         public async Task<LoadResult> GetAllAsync(DataSourceLoadOptionsBase loadOptions)
         {
             //var result = await Task.FromResult(DataSourceLoader.Load(await _companyRepository.GetQueryableAsync(), loadOptions));
-            //result.data = ObjectMapper.Map<List<Company>, List<CompanyDto>>(result.data.Cast<Company>().ToList());
-            
-            return await Task.FromResult(DataSourceLoader.Load(await _companyRepository.GetQueryableAsync(), loadOptions));
+            //result.data = ObjectMapper.Map<IEnumerable<Company>, IEnumerable<CompanyDto>>(result.data.Cast<Company>());
+
+            return DataSourceLoader.Load(await _companyRepository.GetQueryableAsync(), loadOptions); ;
         }
 
         public virtual async Task<PagedResultDto<CompanyWithNavigationPropertiesDto>> GetListAsync(GetCompaniesInput input)
