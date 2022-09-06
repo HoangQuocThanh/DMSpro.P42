@@ -17,6 +17,7 @@ using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Gdpr;
 using DMSpro.P42.SO.EntityFrameworkCore;
 using DMSpro.P42.MDM.EntityFrameworkCore;
+using DMSpro.P42.eRoute.EntityFrameworkCore;
 
 namespace DMSpro.P42.EntityFrameworkCore;
 
@@ -38,6 +39,7 @@ namespace DMSpro.P42.EntityFrameworkCore;
 )]
 [DependsOn(typeof(SOEntityFrameworkCoreModule))]
     [DependsOn(typeof(MDMEntityFrameworkCoreModule))]
+    [DependsOn(typeof(eRouteEntityFrameworkCoreModule))]
     public class P42EntityFrameworkCoreModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

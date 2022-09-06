@@ -6,6 +6,10 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 using DMSpro.P42.MDM.Companies;
+using System.Collections.Generic;
+using DevExtreme.AspNet.Data;
+using Microsoft.AspNetCore.Http;
+using DevExtreme.AspNet.Data.ResponseModel;
 
 namespace DMSpro.P42.MDM.Companies
 {
@@ -22,7 +26,16 @@ namespace DMSpro.P42.MDM.Companies
             _companiesAppService = companiesAppService;
         }
 
+        /*ThanhHQ*/
         [HttpGet]
+        public async Task<LoadResult> GetAllAsync(DataSourceLoadOptionsBase loadOptions)
+        {
+            SortingInfo[] arr = { new SortingInfo { Selector = "Code", Desc = true } };
+            loadOptions.Sort = arr;
+            return await _companiesAppService.GetAllAsync(loadOptions);
+        }
+
+        [HttpGet("input")]
         public Task<PagedResultDto<CompanyWithNavigationPropertiesDto>> GetListAsync(GetCompaniesInput input)
         {
             return _companiesAppService.GetListAsync(input);
@@ -68,5 +81,6 @@ namespace DMSpro.P42.MDM.Companies
         {
             return _companiesAppService.DeleteAsync(id);
         }
+
     }
 }

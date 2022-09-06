@@ -1,0 +1,21 @@
+﻿@page
+@using DMSpro.P42.eRoute.Web.Menus
+@using Microsoft.Extensions.Localization
+@using DMSpro.P42.eRoute.Localization
+@using DMSpro.P42.eRoute.Web.Pages.eRoute
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@model DMSpro.P42.eRoute.Web.Pages.eRoute.IndexModel
+@inject IStringLocalizer<eRouteResource> L
+
+@inject IPageLayout PageLayout
+
+@{
+    PageLayout.Content.Title = L["eRoute"].Value;
+    PageLayout.Content.MenuItemName = eRouteMenus.Map;
+}
+
+@section scripts {
+    <abp-script src="/Pages/eRoute/Index.js" />
+}
+
+<div id="map"></div>

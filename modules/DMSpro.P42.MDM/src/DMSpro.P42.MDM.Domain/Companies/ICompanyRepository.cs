@@ -1,5 +1,7 @@
+using DevExtreme.AspNet.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
@@ -9,9 +11,8 @@ namespace DMSpro.P42.MDM.Companies
     public interface ICompanyRepository : IRepository<Company, Guid>
     {
         Task<CompanyWithNavigationProperties> GetWithNavigationPropertiesAsync(
-    Guid id,
-    CancellationToken cancellationToken = default
-);
+            Guid id,
+            CancellationToken cancellationToken = default);
 
         Task<List<CompanyWithNavigationProperties>> GetListWithNavigationPropertiesAsync(
             string filterText = null,

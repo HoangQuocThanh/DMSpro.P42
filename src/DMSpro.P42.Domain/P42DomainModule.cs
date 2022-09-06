@@ -23,6 +23,7 @@ using Volo.Abp.Commercial.SuiteTemplates;
 using Volo.Abp.Gdpr;
 using DMSpro.P42.SO;
 using DMSpro.P42.MDM;
+using DMSpro.P42.eRoute;
 
 namespace DMSpro.P42;
 
@@ -47,6 +48,7 @@ namespace DMSpro.P42;
     )]
 [DependsOn(typeof(SODomainModule))]
     [DependsOn(typeof(MDMDomainModule))]
+    [DependsOn(typeof(eRouteDomainModule))]
     public class P42DomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

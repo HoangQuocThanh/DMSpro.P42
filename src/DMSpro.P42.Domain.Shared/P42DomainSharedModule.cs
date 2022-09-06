@@ -20,6 +20,7 @@ using Volo.Abp.Gdpr;
 using Volo.Abp.GlobalFeatures;
 using DMSpro.P42.SO;
 using DMSpro.P42.MDM;
+using DMSpro.P42.eRoute;
 
 namespace DMSpro.P42;
 
@@ -41,6 +42,7 @@ namespace DMSpro.P42;
     )]
 [DependsOn(typeof(SODomainSharedModule))]
     [DependsOn(typeof(MDMDomainSharedModule))]
+    [DependsOn(typeof(eRouteDomainSharedModule))]
     public class P42DomainSharedModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

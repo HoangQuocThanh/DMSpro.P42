@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DMSpro.P42.Domain\DMSpro.P42.Domain.csproj" />
     <ProjectReference Include="..\DMSpro.P42.Application.Contracts\DMSpro.P42.Application.Contracts.csproj" />
-  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Application\DMSpro.P42.SO.Application.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Application\DMSpro.P42.MDM.Application.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Application\DMSpro.P42.SO.Application.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Application\DMSpro.P42.MDM.Application.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.eRoute\src\DMSpro.P42.eRoute.Application\DMSpro.P42.eRoute.Application.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.3.3" />

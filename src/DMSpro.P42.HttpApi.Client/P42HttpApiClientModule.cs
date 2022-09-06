@@ -15,6 +15,7 @@ using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Gdpr;
 using DMSpro.P42.SO;
 using DMSpro.P42.MDM;
+using DMSpro.P42.eRoute;
 
 namespace DMSpro.P42;
 
@@ -36,6 +37,7 @@ namespace DMSpro.P42;
 )]
 [DependsOn(typeof(SOHttpApiClientModule))]
     [DependsOn(typeof(MDMHttpApiClientModule))]
+    [DependsOn(typeof(eRouteHttpApiClientModule))]
     public class P42HttpApiClientModule : AbpModule
 {
     public const string RemoteServiceName = "Default";

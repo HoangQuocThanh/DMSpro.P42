@@ -58,6 +58,11 @@ using Volo.Abp.VirtualFileSystem;
 using Volo.Saas.Host;
 using DMSpro.P42.SO.Web;
 using DMSpro.P42.MDM.Web;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
+using DMSpro.P42.Web.Bundling;
+using DMSpro.P42.Web.Components.DevExtremeJs;
+using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook;
+using DMSpro.P42.eRoute.Web;
 
 namespace DMSpro.P42.Web;
 
@@ -86,6 +91,7 @@ namespace DMSpro.P42.Web;
     )]
 [DependsOn(typeof(SOWebModule))]
     [DependsOn(typeof(MDMWebModule))]
+    [DependsOn(typeof(eRouteWebModule))]
     public class P42WebModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -122,6 +128,20 @@ namespace DMSpro.P42.Web;
         ConfigureSwaggerServices(context.Services);
         ConfigureMultiTenancy();
         ConfigureBackgroundJobs();
+
+        //ThanhHQ
+        ConfigDevExtreme();
+    }
+
+    private void ConfigDevExtreme()
+    {
+        Configure<AbpLayoutHookOptions>(options =>
+        {
+            options.Add(
+                LayoutHooks.Head.Last, //The hook name
+                typeof(DevExtremeJsViewComponent) //The component to add
+            );
+        });
     }
 
     private void ConfigureBackgroundJobs()
@@ -143,6 +163,8 @@ namespace DMSpro.P42.Web;
                     bundle.AddFiles("/global-styles.css");
                 }
             );
+            options.StyleBundles.Get(StandardBundles.Styles.Global)
+                .AddContributors(typeof(P42StyleContributor));
         });
     }
 

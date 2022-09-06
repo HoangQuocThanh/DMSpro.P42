@@ -17,6 +17,7 @@ using Volo.Abp.TextTemplateManagement;
 using Volo.Saas.Host;
 using DMSpro.P42.SO;
 using DMSpro.P42.MDM;
+using DMSpro.P42.eRoute;
 
 namespace DMSpro.P42;
 
@@ -39,6 +40,7 @@ namespace DMSpro.P42;
     )]
 [DependsOn(typeof(SOApplicationModule))]
     [DependsOn(typeof(MDMApplicationModule))]
+    [DependsOn(typeof(eRouteApplicationModule))]
     public class P42ApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

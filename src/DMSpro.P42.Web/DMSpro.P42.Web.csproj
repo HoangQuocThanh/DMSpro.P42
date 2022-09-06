@@ -15,10 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="6.0.5" />
-  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Web\DMSpro.P42.SO.Web.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Web\DMSpro.P42.MDM.Web.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Web\DMSpro.P42.SO.Web.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Web\DMSpro.P42.MDM.Web.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.eRoute\src\DMSpro.P42.eRoute.Web\DMSpro.P42.eRoute.Web.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="5.3.3" />
@@ -58,5 +59,9 @@
     <Content Include="Pages\**\*.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\index.js" />
   </ItemGroup>
 </Project>

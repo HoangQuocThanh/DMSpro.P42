@@ -22,7 +22,7 @@
     <PackageReference Include="Volo.Saas.EntityFrameworkCore" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.TextTemplateManagement.EntityFrameworkCore" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.Gdpr.EntityFrameworkCore" Version="5.3.3" />
-  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.EntityFrameworkCore\DMSpro.P42.SO.EntityFrameworkCore.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.EntityFrameworkCore\DMSpro.P42.MDM.EntityFrameworkCore.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.EntityFrameworkCore\DMSpro.P42.SO.EntityFrameworkCore.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.EntityFrameworkCore\DMSpro.P42.MDM.EntityFrameworkCore.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.eRoute\src\DMSpro.P42.eRoute.EntityFrameworkCore\DMSpro.P42.eRoute.EntityFrameworkCore.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">

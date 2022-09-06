@@ -9,9 +9,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DMSpro.P42.Domain.Shared\DMSpro.P42.Domain.Shared.csproj" />
-  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Application.Contracts\DMSpro.P42.SO.Application.Contracts.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Application.Contracts\DMSpro.P42.MDM.Application.Contracts.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Application.Contracts\DMSpro.P42.SO.Application.Contracts.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Application.Contracts\DMSpro.P42.MDM.Application.Contracts.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.eRoute\src\DMSpro.P42.eRoute.Application.Contracts\DMSpro.P42.eRoute.Application.Contracts.csproj" /></ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="22.1.4" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.SettingManagement.Application.Contracts" Version="5.3.3" />

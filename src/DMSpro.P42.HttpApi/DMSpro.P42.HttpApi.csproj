@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DMSpro.P42.Application.Contracts\DMSpro.P42.Application.Contracts.csproj" />
-  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.HttpApi\DMSpro.P42.SO.HttpApi.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.HttpApi\DMSpro.P42.MDM.HttpApi.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.HttpApi\DMSpro.P42.SO.HttpApi.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.HttpApi\DMSpro.P42.MDM.HttpApi.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.eRoute\src\DMSpro.P42.eRoute.HttpApi\DMSpro.P42.eRoute.HttpApi.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" Version="5.3.3" />

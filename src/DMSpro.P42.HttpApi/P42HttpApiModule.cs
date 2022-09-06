@@ -16,6 +16,7 @@ using Volo.Abp.TextTemplateManagement;
 using Volo.Abp.Gdpr;
 using DMSpro.P42.SO;
 using DMSpro.P42.MDM;
+using DMSpro.P42.eRoute;
 
 namespace DMSpro.P42;
 
@@ -36,6 +37,7 @@ namespace DMSpro.P42;
     )]
 [DependsOn(typeof(SOHttpApiModule))]
     [DependsOn(typeof(MDMHttpApiModule))]
+    [DependsOn(typeof(eRouteHttpApiModule))]
     public class P42HttpApiModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

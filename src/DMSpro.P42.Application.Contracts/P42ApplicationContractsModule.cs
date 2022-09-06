@@ -13,6 +13,7 @@ using Volo.Saas.Host;
 using Volo.Abp.Gdpr;
 using DMSpro.P42.SO;
 using DMSpro.P42.MDM;
+using DMSpro.P42.eRoute;
 
 namespace DMSpro.P42;
 
@@ -34,6 +35,7 @@ namespace DMSpro.P42;
 )]
 [DependsOn(typeof(SOApplicationContractsModule))]
     [DependsOn(typeof(MDMApplicationContractsModule))]
+    [DependsOn(typeof(eRouteApplicationContractsModule))]
     public class P42ApplicationContractsModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

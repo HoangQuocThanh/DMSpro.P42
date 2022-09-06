@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DMSpro.P42.Domain.Shared\DMSpro.P42.Domain.Shared.csproj" />
-  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Domain\DMSpro.P42.SO.Domain.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Domain\DMSpro.P42.MDM.Domain.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\DMSpro.P42.SO\src\DMSpro.P42.SO.Domain\DMSpro.P42.SO.Domain.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.MDM\src\DMSpro.P42.MDM.Domain\DMSpro.P42.MDM.Domain.csproj" /><ProjectReference Include="..\..\modules\DMSpro.P42.eRoute\src\DMSpro.P42.eRoute.Domain\DMSpro.P42.eRoute.Domain.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" Version="5.3.3" />

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using DMSpro.P42.MDM.EntityFrameworkCore;
+using DevExtreme.AspNet.Data;
 
 namespace DMSpro.P42.MDM.Companies
 {

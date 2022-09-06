@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>DMSpro.P42.eRoute</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.3.3" />
+    <ProjectReference Include="..\DMSpro.P42.eRoute.Domain\DMSpro.P42.eRoute.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

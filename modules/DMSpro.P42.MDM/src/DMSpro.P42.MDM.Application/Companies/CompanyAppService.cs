@@ -12,6 +12,9 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using DMSpro.P42.MDM.Permissions;
 using DMSpro.P42.MDM.Companies;
+using Volo.Abp.ObjectMapping;
+using DevExtreme.AspNet.Data;
+using DevExtreme.AspNet.Data.ResponseModel;
 
 namespace DMSpro.P42.MDM.Companies
 {
@@ -27,6 +30,15 @@ namespace DMSpro.P42.MDM.Companies
         {
             _companyRepository = companyRepository;
             _companyManager = companyManager; _identityUserRepository = identityUserRepository;
+        }
+
+        /*ThanhHQ*/
+        public async Task<LoadResult> GetAllAsync(DataSourceLoadOptionsBase loadOptions)
+        {
+            //var result = await Task.FromResult(DataSourceLoader.Load(await _companyRepository.GetQueryableAsync(), loadOptions));
+            //result.data = ObjectMapper.Map<List<Company>, List<CompanyDto>>(result.data.Cast<Company>().ToList());
+            
+            return await Task.FromResult(DataSourceLoader.Load(await _companyRepository.GetQueryableAsync(), loadOptions));
         }
 
         public virtual async Task<PagedResultDto<CompanyWithNavigationPropertiesDto>> GetListAsync(GetCompaniesInput input)

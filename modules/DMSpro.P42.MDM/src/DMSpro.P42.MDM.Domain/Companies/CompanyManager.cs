@@ -47,9 +47,9 @@ namespace DMSpro.P42.MDM.Companies
 
             var company = await AsyncExecuter.FirstOrDefaultAsync(query);
 
-            company.Code = code;
-            company.Name = name;
-            company.Address1 = address1;
+            company.Code = code ?? company.Code;
+            company.Name = name ?? company.Name;
+            company.Address1 = address1 ?? company.Address1;
 
             await SetIdentityUsersAsync(company, identityUserIds);
 

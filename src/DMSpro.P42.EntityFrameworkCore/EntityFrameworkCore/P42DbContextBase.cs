@@ -14,6 +14,7 @@ using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Gdpr;
 using DMSpro.P42.SO.EntityFrameworkCore;
 using DMSpro.P42.MDM.EntityFrameworkCore;
+using DMSpro.P42.eRoute.EntityFrameworkCore;
 
 namespace DMSpro.P42.EntityFrameworkCore;
 
@@ -62,5 +63,6 @@ public abstract class P42DbContextBase<TDbContext> : AbpDbContext<TDbContext>
         builder.ConfigureSO();
             builder.ConfigureMDM();
             builder.ConfigureIdentity();
+            builder.ConfigureeRoute();
         }
 }
